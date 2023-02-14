@@ -3,7 +3,7 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 import axios from 'axios';
-import { initializeApp } from 'firebase/app';
+import firebase from 'firebase/app';
 
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -24,9 +24,17 @@ const firebaseConfig = {
 Vue.prototype.$axios = axios;
 Vue.config.productionTip = false;
 
-initializeApp(firebaseConfig);
-new Vue({
-  router,
-  store,
-  render: (h) => h(App),
-}).$mount('#app');
+firebase.initializeApp(firebaseConfig);
+
+let app;
+
+firebase.auth().onAuthStateChanged((user) => {
+  console.log('user', user);
+  if (!app) {
+    app = new Vue({
+      router,
+      store,
+      render: (h) => h(App),
+    }).$mount('#app');
+  }
+});

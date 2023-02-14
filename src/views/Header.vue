@@ -17,13 +17,15 @@
         <!-- Right aligned nav items -->
         <b-navbar-nav class="d-flex ml-auto">
           <b-nav-item href="#about">Username</b-nav-item>
-          <b-nav-item href="#benefits">Logout</b-nav-item>
+          <b-nav-item @click="signOut()">Logout</b-nav-item>
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
   </b-container>
 </template>
 <script>
+import * as firebase from 'firebase/app';
+import 'firebase/auth';
 import {
   BNavbar,
   BNavbarBrand,
@@ -42,6 +44,32 @@ export default {
     BNavItem,
     BContainer,
     BNavbarToggle,
+  },
+  mounted() {
+    this.setupFirebase();
+  },
+  methods: {
+    setupFirebase() {
+      firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+          // User is signed in.
+          console.log('signed in');
+          this.loggedIn = true;
+        } else {
+          // No user is signed in.
+          this.loggedIn = false;
+          console.log('signed out', this.loggedIn);
+        }
+      });
+    },
+    signOut() {
+      firebase
+        .auth()
+        .signOut()
+        .then(() => {
+          this.$router.replace({ name: 'login' });
+        });
+    },
   },
 };
 </script>

@@ -29,10 +29,10 @@
           required
         ></b-form-input>
       </b-form-group>
-
+      <div class="error" v-if="error">{{ error.message }}</div>
       <b-button class="mt-2" @click="toLogin()" href="#" variant="primary"
-        >Sign in</b-button
-      >
+        >Sign in
+      </b-button>
     </div>
     <div>
       <p>
@@ -55,6 +55,7 @@ export default {
         email: '',
         password: '',
       },
+      error: '',
     };
   },
   methods: {
@@ -71,11 +72,7 @@ export default {
           this.$router.push({ name: 'home' });
         })
         .catch((error) => {
-          this.$bvToast.toast(error.message, {
-            title: 'Login Error',
-            variant: 'danger',
-            autoHideDelay: 5000,
-          });
+          this.error = error;
         });
     },
   },
@@ -92,5 +89,8 @@ export default {
 }
 .register-link {
   cursor: pointer;
+}
+.error {
+  color: red;
 }
 </style>

@@ -1,6 +1,5 @@
 <template>
   <section>
-    <div v-if="error">{{ error }}</div>
     <div class="card">
       <b-form-group
         id="input-group-1"
@@ -30,9 +29,17 @@
           required
         ></b-form-input>
       </b-form-group>
-      <b-button class="mt-2" @click="registerUser()" variant="primary"
+      <div class="error" v-if="error">{{ error.message }}</div>
+      <b-button class="mt-2 mb-2" @click="registerUser()" variant="primary"
         >Register</b-button
       >
+
+      <div>
+        <p>
+          Have an account?
+          <u class="register-link" @click="toLogin()">Click here to sign in</u>
+        </p>
+      </div>
     </div>
   </section>
 </template>
@@ -53,25 +60,17 @@ export default {
     };
   },
   methods: {
+    toLogin() {
+      this.$router.push({ name: 'login' });
+    },
     async registerUser() {
       await firebase
         .auth()
         .createUserWithEmailAndPassword(this.form.email, this.form.password)
-        .then((response) => {
-          this.$bvToast.toast(`Account created successfully`, {
-            title: 'Register Success',
-            variant: 'danger',
-            autoHideDelay: 5000,
-          });
-          this.$router.push({ name: 'login' });
+        .then(() => {
+          this.$router.push({ name: 'home' });
         })
-        .catch((error) => {
-          this.$bvToast.toast(error.message, {
-            title: 'Register Error',
-            variant: 'danger',
-            autoHideDelay: 5000,
-          });
-        });
+        .catch((error) => (this.error = error));
     },
   },
 };
@@ -84,5 +83,12 @@ export default {
   border: none;
 
   padding: 10px 15px;
+}
+.register-link {
+  cursor: pointer;
+}
+.error {
+  color: red;
+  font-size: 18px;
 }
 </style>
