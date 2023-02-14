@@ -16,6 +16,12 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "register" */ '../views/Login/Register.vue'),
   },
+  {
+    path: '/home',
+    name: 'home',
+    // eslint-disable-next-line
+    component: () => import(/* webpackChunkName: "home" */ '../views/Home.vue'),
+  },
 ];
 
 const router = new VueRouter({

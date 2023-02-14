@@ -8,7 +8,7 @@
       >
         <b-form-input
           id="input-1"
-          v-moldel="form.username"
+          v-model="form.email"
           type="email"
           placeholder="Username"
           required
@@ -24,13 +24,15 @@
         <b-form-input
           id="input-1"
           type="password"
-          v-moldel="form.password"
+          v-model="form.password"
           placeholder="Password"
           required
         ></b-form-input>
       </b-form-group>
 
-      <b-button class="mt-2" href="#" variant="primary">Sign in</b-button>
+      <b-button class="mt-2" @click="toLogin()" href="#" variant="primary"
+        >Sign in</b-button
+      >
     </div>
     <div>
       <p>
@@ -41,13 +43,16 @@
   </section>
 </template>
 <script>
+import firebase from 'firebase';
+import store from '@/store';
+
 export default {
   /* eslint-disable */
   name: 'Login',
   data() {
     return {
       form: {
-        username: '',
+        email: '',
         password: '',
       },
     };
@@ -55,6 +60,23 @@ export default {
   methods: {
     toRegister() {
       this.$router.push({ name: 'register' });
+    },
+    async toLogin() {
+      await firebase
+        .auth()
+        .signInWithEmailAndPassword(this.form.email, this.form.password)
+        .then((response) => {
+          store.commit('setToken', response.user.l);
+          store.commit('setRefreshToken', response.user.refreshToken);
+          this.$router.push({ name: 'home' });
+        })
+        .catch((error) => {
+          this.$bvToast.toast(error.message, {
+            title: 'Login Error',
+            variant: 'danger',
+            autoHideDelay: 5000,
+          });
+        });
     },
   },
 };

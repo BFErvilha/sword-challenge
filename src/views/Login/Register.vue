@@ -54,15 +54,24 @@ export default {
   },
   methods: {
     async registerUser() {
-      console.log(this.form);
-      try {
-        const userCredential = await firebase
-          .auth()
-          .createUserWithEmailAndPassword(this.form.email, this.form.password);
-        console.log(userCredential.user);
-      } catch (error) {
-        console.log(error);
-      }
+      await firebase
+        .auth()
+        .createUserWithEmailAndPassword(this.form.email, this.form.password)
+        .then((response) => {
+          this.$bvToast.toast(`Account created successfully`, {
+            title: 'Register Success',
+            variant: 'danger',
+            autoHideDelay: 5000,
+          });
+          this.$router.push({ name: 'login' });
+        })
+        .catch((error) => {
+          this.$bvToast.toast(error.message, {
+            title: 'Register Error',
+            variant: 'danger',
+            autoHideDelay: 5000,
+          });
+        });
     },
   },
 };

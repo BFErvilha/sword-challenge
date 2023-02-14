@@ -1,17 +1,22 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import Vue from 'vue';
+import Vuex from 'vuex';
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    token: '',
+    refreshToken: '',
   },
-  getters: {
-  },
+  getters: {},
   mutations: {
+    setToken(state, token) {
+      state.token = token;
+    },
+    setRefreshToken(state, refreshToken) {
+      state.refreshToken = refreshToken;
+    },
   },
-  actions: {
-  },
-  modules: {
-  }
-})
+  actions: {},
+  modules: {},
+});
