@@ -2,7 +2,7 @@
   <section>
     <b-row>
       <b-col cols="12" class="mt-2">
-        <div class="d-flex">
+        <div class="d-flex justify-content-between">
           <b-dropdown :id="language" :text="`Top ${language}`" class="m-2">
             <b-dropdown-item-button @click="filter.sort = 'stars'"
               >Sort by stars
@@ -17,12 +17,26 @@
               >Sort by update
             </b-dropdown-item-button>
           </b-dropdown>
+
+          <b-pagination
+            class="mt-2"
+            v-model="filter.currentPage"
+            :total-rows="filter.totalRows"
+            :per-page="filter.per_page"
+            first-number
+          ></b-pagination>
         </div>
       </b-col>
       <b-col cols="12">
         <b-row>
-          <b-col v-for="repo in data" :key="repo.id">
-            <LanguageCard :repo="repo" />
+          <b-col
+            class="match-height"
+            sm="12"
+            lg="3"
+            v-for="repo in data"
+            :key="repo.id"
+          >
+            <LanguageCard :repo="repo" :isLoading="loading" />
           </b-col>
         </b-row>
       </b-col>
@@ -44,8 +58,10 @@ export default {
     return {
       filter: {
         sort: '',
-        per_page: 6,
+        per_page: 4,
         order: 'desc',
+        currentPage: 1,
+        totalRows: 0,
       },
       data: [],
       sortEnum: [
@@ -54,6 +70,7 @@ export default {
         { name: 'issues', queryType: 'help-wanted-issues' },
         { name: 'update', queryType: 'updated' },
       ],
+      loading: false,
     };
   },
   watch: {
@@ -62,12 +79,26 @@ export default {
         this.getTop();
       }
     },
+    'filter.currentPage'(newValue) {
+      if (newValue) {
+        this.getTop();
+      }
+    },
   },
   methods: {
     async getTop() {
-      await getTopRepos(this.language, this.filter).then((res) => {
-        this.data = res.data.items;
-      });
+      this.loading = true;
+      await getTopRepos(this.language, this.filter)
+        .then((res) => {
+          this.data = res.data.items;
+          this.filter.totalRows = res.data.total_count / this.filter.per_page;
+          this.loading = false;
+        })
+        .catch((err) => {
+          console.log(err);
+          this.loading = false;
+        })
+        .finally(() => (this.loading = false));
     },
   },
   created() {
@@ -76,4 +107,9 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.match-height {
+  display: flex;
+  flex-flow: column;
+}
+</style>
