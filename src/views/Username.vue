@@ -1,21 +1,18 @@
 <template>
   <section>
     <Header />
-    <Bookmarks />
-    <ToogleTopics />
+    <Account />
   </section>
 </template>
 <script>
 import Header from '@/components/Header/Header';
-import Bookmarks from './Bookmarks';
-import ToogleTopics from './ToogleTopics';
+import Account from './Account/Account';
 export default {
   // eslint-disable-next-line
-  name: 'Home',
+  name: 'Username',
   components: {
     Header,
-    Bookmarks,
-    ToogleTopics,
+    Account,
   },
 };
 </script>

@@ -28,11 +28,11 @@ const routes = [
     },
   },
   {
-    path: '/account',
-    name: 'account',
+    path: '/username',
+    name: 'username',
     // eslint-disable-next-line
     component: () =>
-      import(/* webpackChunkName: "home" */ '../views/Account/Account.vue'),
+      import(/* webpackChunkName: "username" */ '../views/Username.vue'),
     meta: {
       requiresAuth: true,
     },

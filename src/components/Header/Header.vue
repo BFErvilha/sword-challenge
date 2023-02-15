@@ -16,7 +16,7 @@
       >
         <!-- Right aligned nav items -->
         <b-navbar-nav class="d-flex ml-auto">
-          <b-nav-item href="#about">Username</b-nav-item>
+          <b-nav-item href="/username">Username</b-nav-item>
           <b-nav-item @click="signOut()">Logout</b-nav-item>
         </b-navbar-nav>
       </b-collapse>

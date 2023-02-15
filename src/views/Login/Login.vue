@@ -10,7 +10,7 @@
           id="input-1"
           v-model="form.email"
           type="email"
-          placeholder="Username"
+          placeholder="E-mail"
           required
         ></b-form-input>
       </b-form-group>
