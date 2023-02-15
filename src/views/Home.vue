@@ -1,19 +1,16 @@
 <template>
   <section>
-    <Header />
     <Bookmarks />
     <ToogleTopics />
   </section>
 </template>
 <script>
-import Header from '@/components/Header/Header';
 import Bookmarks from './Bookmarks';
 import ToogleTopics from './ToogleTopics';
 export default {
   // eslint-disable-next-line
   name: 'Home',
   components: {
-    Header,
     Bookmarks,
     ToogleTopics,
   },

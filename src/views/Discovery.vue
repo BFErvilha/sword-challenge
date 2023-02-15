@@ -1,15 +1,18 @@
 <template>
   <section>
-    <Account />
+    <Bookmarks />
+    <ToogleTopics />
   </section>
 </template>
 <script>
-import Account from './Account/Account';
+import Bookmarks from './Bookmarks';
+import ToogleTopics from './ToogleTopics';
 export default {
   // eslint-disable-next-line
-  name: 'Username',
+  name: 'Discovery',
   components: {
-    Account,
+    Bookmarks,
+    ToogleTopics,
   },
 };
 </script>

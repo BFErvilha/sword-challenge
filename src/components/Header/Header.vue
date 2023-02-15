@@ -4,7 +4,7 @@
       <b-navbar-brand to="/"> SwordHealth Challenge </b-navbar-brand>
 
       <b-navbar-nav class="d-flex ml-auto">
-        <b-nav-item href="/home">Discovery</b-nav-item>
+        <b-nav-item to="/home">Discovery</b-nav-item>
       </b-navbar-nav>
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -16,7 +16,7 @@
       >
         <!-- Right aligned nav items -->
         <b-navbar-nav class="d-flex ml-auto">
-          <b-nav-item href="/username">Username</b-nav-item>
+          <b-nav-item to="/username">Username</b-nav-item>
           <b-nav-item @click="signOut()">Logout</b-nav-item>
         </b-navbar-nav>
       </b-collapse>
