@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="login">
     <div class="card">
       <b-form-group
         id="input-group-1"
@@ -14,7 +14,6 @@
           required
         ></b-form-input>
       </b-form-group>
-
       <b-form-group
         id="input-group-1"
         label="Password:"
@@ -30,15 +29,17 @@
         ></b-form-input>
       </b-form-group>
       <div class="error" v-if="error">{{ error.message }}</div>
-      <b-button class="mt-2" @click="toLogin()" href="#" variant="primary"
+      <b-button class="btn-login mt-2" @click="toLogin()" href="#"
         >Sign in
       </b-button>
-    </div>
-    <div>
-      <p>
-        Don't have an account?
-        <u class="register-link" @click="toRegister()">Click here to sign up</u>
-      </p>
+      <div class="mt-3">
+        <p>
+          Don't have an account?
+          <u class="register-link" @click="toRegister()"
+            >Click here to sign up</u
+          >
+        </p>
+      </div>
     </div>
   </section>
 </template>
@@ -79,18 +80,47 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.card {
-  width: 600px;
-  max-width: 100%;
-  margin: 0 auto;
-  border: none;
+.login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
 
-  padding: 10px 15px;
+  .card {
+    width: 600px;
+    max-width: 100%;
+    margin: 0 auto;
+    border: none;
+
+    padding: 10px 15px;
+    .btn-login {
+      background-color: #f46262;
+      border-color: #f46262;
+
+      &:hover {
+        background-color: #b24747;
+        border-color: #8e3636;
+      }
+    }
+  }
+  .register-link {
+    cursor: pointer;
+    color: #f46262;
+
+    &:hover {
+      color: #b24747;
+    }
+  }
+  .error {
+    color: red;
+  }
 }
-.register-link {
-  cursor: pointer;
-}
-.error {
-  color: red;
+</style>
+<style lang="scss">
+.form-group {
+  label {
+    text-align: left;
+    margin-bottom: 5px;
+  }
 }
 </style>

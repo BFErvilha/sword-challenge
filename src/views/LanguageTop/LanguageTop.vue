@@ -3,7 +3,11 @@
     <b-row>
       <b-col cols="12" class="mt-2">
         <div class="d-flex justify-content-between">
-          <b-dropdown :id="language" :text="`Top ${language}`" class="m-2">
+          <b-dropdown
+            :id="language"
+            :text="`Top ${language}`"
+            class="sortDropdown m-2"
+          >
             <b-dropdown-item-button @click="filter.sort = 'stars'"
               >Sort by stars
             </b-dropdown-item-button>
@@ -19,7 +23,7 @@
           </b-dropdown>
 
           <b-pagination
-            class="mt-2"
+            class="langPagination mt-2"
             v-model="filter.currentPage"
             :total-rows="filter.totalRows"
             :per-page="filter.per_page"
@@ -135,5 +139,29 @@ export default {
 .match-height {
   display: flex;
   flex-flow: column;
+}
+</style>
+<style lang="scss">
+.sortDropdown {
+  button.dropdown-toggle {
+    background-color: #1e1e1e;
+    boder-color: #1e1e1e;
+    color: #f7f4f2;
+  }
+}
+.langPagination {
+  .page-item {
+    .page-link {
+      color: #f46262;
+    }
+    &.active {
+      .page-link {
+        color: #f46262;
+        background-color: #1e1e1e;
+        border-color: #1e1e1e;
+        box-shadow: none;
+      }
+    }
+  }
 }
 </style>

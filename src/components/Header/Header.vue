@@ -1,7 +1,7 @@
 <template>
   <b-container fluid class="p-0">
-    <b-navbar toggleable="lg" type="dark" variant="secondary" class="p-3">
-      <b-navbar-brand to="/"> SwordHealth Challenge </b-navbar-brand>
+    <b-navbar toggleable="lg" class="header p-3">
+      <b-navbar-brand> <strong>SwordHealth Challenge</strong> </b-navbar-brand>
 
       <b-navbar-nav class="d-flex ml-auto">
         <b-nav-item to="/home">Discovery</b-nav-item>
@@ -69,3 +69,23 @@ export default {
   },
 };
 </script>
+<style lang="scss" scoped>
+.header {
+  background-color: #1e1e1e;
+
+  .navbar-brand {
+    color: #f46262;
+  }
+  .nav-link {
+    color: #f7f4f2;
+
+    &.router-link-active {
+      color: #f46262;
+    }
+
+    &:hover {
+      color: #f46262;
+    }
+  }
+}
+</style>

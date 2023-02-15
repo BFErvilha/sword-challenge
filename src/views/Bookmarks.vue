@@ -7,7 +7,7 @@
         </div>
         <b-pagination
           v-if="bookmarksList.length > 0"
-          class="mt-2"
+          class="langPagination mt-2"
           :total-rows="bookmarksList.length"
           v-model="currentPage"
           :per-page="4"
@@ -88,6 +88,23 @@ export default {
     h1 {
       font-weight: bold;
       font-size: 22px;
+      color: #8e3636;
+    }
+  }
+}
+
+.langPagination {
+  .page-item {
+    .page-link {
+      color: #f46262;
+    }
+    &.active {
+      .page-link {
+        color: #f46262;
+        background-color: #1e1e1e;
+        border-color: #1e1e1e;
+        box-shadow: none;
+      }
     }
   }
 }

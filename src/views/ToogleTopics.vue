@@ -14,7 +14,7 @@
             class="language-filter"
           >
             <b-button
-              class="w-100"
+              class="btn-toogle w-100"
               pill
               :pressed.sync="lang.state"
               variant="primary"
@@ -61,6 +61,18 @@ export default {
     h1 {
       font-weight: bold;
       font-size: 22px;
+      color: #8e3636;
+    }
+  }
+
+  .btn-toogle {
+    background-color: #f46262;
+    border-color: #f46262;
+
+    &:hover,
+    &.active {
+      background-color: #b24747;
+      border-color: #8e3636;
     }
   }
 }

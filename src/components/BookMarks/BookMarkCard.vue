@@ -47,7 +47,7 @@
           </b-col>
           <b-col>
             <b-button
-              variant="primary"
+              class="btn-repo"
               size="sm"
               @click="goToRepoLink(repo.svn_url)"
               >Repo</b-button
@@ -115,5 +115,20 @@ export default {
 
 .description {
   font-size: 15px;
+}
+
+.card-footer {
+  background-color: #1e1e1e;
+
+  .btn-repo {
+    border-color: #f46262;
+    background-color: #1e1e1e;
+    color: #f46262;
+
+    &:hover {
+      background-color: #f46262;
+      color: #1e1e1e;
+    }
+  }
 }
 </style>
