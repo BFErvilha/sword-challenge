@@ -27,6 +27,16 @@ const routes = [
       requiresAuth: true,
     },
   },
+  {
+    path: '/account',
+    name: 'account',
+    // eslint-disable-next-line
+    component: () =>
+      import(/* webpackChunkName: "home" */ '../views/Account/Account.vue'),
+    meta: {
+      requiresAuth: true,
+    },
+  },
 ];
 
 const router = new VueRouter({
