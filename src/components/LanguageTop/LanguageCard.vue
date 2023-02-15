@@ -7,6 +7,13 @@
             <span class="badge">{{ repo.language }}</span>
             <span class="star-favorite" @click="toBookMark(repo)">
               <img
+                v-if="isBookmarked(repo.id)"
+                src="@/assets/icons/star-fill.svg"
+                v-b-tooltip.hover.bottom="`BookMark`"
+                class="mt-1"
+              />
+              <img
+                v-else
                 src="@/assets/icons/star.svg"
                 v-b-tooltip.hover.bottom="`BookMark`"
                 class="mt-1"
@@ -74,9 +81,20 @@ export default {
   directives: {
     'b-tooltip': VBTooltip,
   },
+  data() {
+    return {
+      bookmarks: [],
+    };
+  },
   methods: {
     goToRepoLink(link) {
       window.open(link, '_blank');
+    },
+    toBookMark(item) {
+      this.$emit('toBookMark', item);
+    },
+    isBookmarked(id) {
+      this.$emit('isBookmarked', id);
     },
   },
 };

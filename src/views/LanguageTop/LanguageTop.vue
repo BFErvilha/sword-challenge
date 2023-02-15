@@ -36,7 +36,12 @@
             v-for="repo in data"
             :key="repo.id"
           >
-            <LanguageCard :repo="repo" :isLoading="loading" />
+            <LanguageCard
+              :repo="repo"
+              :isLoading="loading"
+              @toBookMark="toBookMark"
+              @isBookmarked="isBookmarked"
+            />
           </b-col>
         </b-row>
       </b-col>
@@ -64,6 +69,7 @@ export default {
         totalRows: 0,
       },
       data: [],
+      bookmarks: [],
       sortEnum: [
         { name: 'stars', queryType: 'stars' },
         { name: 'forks', queryType: 'forks' },
@@ -99,6 +105,18 @@ export default {
           this.loading = false;
         })
         .finally(() => (this.loading = false));
+    },
+    toBookMark(item) {
+      console.log(item.id);
+      console.log(this.bookmarks);
+      if (!this.bookmarks.find((el) => el.id === item.id)) {
+        this.bookmarks.push(item);
+      } else {
+        this.bookmarks = this.bookmarks.filter((el) => el.id !== item.id);
+      }
+    },
+    isBookmarked(id) {
+      return this.bookmarks.find((item) => item.id === id);
     },
   },
   created() {
