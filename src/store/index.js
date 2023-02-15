@@ -25,7 +25,7 @@ export default new Vuex.Store({
       state.bookmarks.push(item);
     },
     removeBookmark(state, item) {
-      state.bookmarks.splice(item, 1);
+      state.bookmarks = state.bookmarks.filter((el) => el.id !== item.id);
     },
   },
   actions: {},

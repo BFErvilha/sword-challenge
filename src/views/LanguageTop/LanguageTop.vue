@@ -118,7 +118,11 @@ export default {
       }
     },
     isBookmarked(id) {
-      return this.bookmarks.find((item) => item.id === id);
+      if (this.bookmarks.find((item) => item.id === id)) {
+        return true;
+      } else {
+        return false;
+      }
     },
   },
   created() {

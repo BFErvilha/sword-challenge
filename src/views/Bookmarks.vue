@@ -6,6 +6,7 @@
           <h1>My Bookmarks</h1>
         </div>
         <b-pagination
+          v-if="bookmarksList.length > 0"
           class="mt-2"
           :total-rows="bookmarksList.length"
           v-model="currentPage"
@@ -22,11 +23,7 @@
             v-for="bookmark in itemsForPage"
             :key="bookmark.id"
           >
-            <BookMarkCard
-              :repo="bookmark"
-              :isLoading="loading"
-              @removeBookMark="removeBookMark"
-            />
+            <BookMarkCard :repo="bookmark" @removeBookMark="removeBookMark" />
           </b-col>
         </b-row>
       </b-col>
@@ -51,6 +48,12 @@ export default {
   watch: {
     bookmarksList() {
       this.setList();
+    },
+    '$store.state.bookmarks': {
+      immediate: true,
+      handler() {
+        this.setList();
+      },
     },
   },
   computed: {
