@@ -30,7 +30,7 @@
       <b-col cols="12">
         <b-row>
           <b-col
-            class="match-height"
+            class="match-height mt-2 mb-2"
             sm="12"
             lg="3"
             v-for="repo in data"
@@ -40,7 +40,7 @@
               :repo="repo"
               :isLoading="loading"
               @toBookMark="toBookMark"
-              @isBookmarked="isBookmarked"
+              :isBookmarked="isBookmarked(repo.id)"
             />
           </b-col>
         </b-row>
@@ -69,7 +69,6 @@ export default {
         totalRows: 0,
       },
       data: [],
-      bookmarks: [],
       sortEnum: [
         { name: 'stars', queryType: 'stars' },
         { name: 'forks', queryType: 'forks' },
@@ -78,6 +77,11 @@ export default {
       ],
       loading: false,
     };
+  },
+  computed: {
+    bookmarks() {
+      return this.$store.getters.bookmarks;
+    },
   },
   watch: {
     'filter.sort'(newValue) {
@@ -107,12 +111,10 @@ export default {
         .finally(() => (this.loading = false));
     },
     toBookMark(item) {
-      console.log(item.id);
-      console.log(this.bookmarks);
       if (!this.bookmarks.find((el) => el.id === item.id)) {
-        this.bookmarks.push(item);
+        this.$store.commit('addBookmark', item);
       } else {
-        this.bookmarks = this.bookmarks.filter((el) => el.id !== item.id);
+        this.$store.commit('removeBookmark', item);
       }
     },
     isBookmarked(id) {

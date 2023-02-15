@@ -8,8 +8,18 @@
       </b-col>
       <b-col>
         <b-row>
-          <b-col>
-            <BookMarkCard />
+          <b-col
+            class="match-height mt-2 mb-2"
+            sm="12"
+            lg="3"
+            v-for="bookmark in bookmarksList"
+            :key="bookmark.id"
+          >
+            <BookMarkCard
+              :repo="bookmark"
+              :isLoading="loading"
+              @removeBookMark="removeBookMark"
+            />
           </b-col>
         </b-row>
       </b-col>
@@ -17,13 +27,35 @@
   </b-container>
 </template>
 <script>
-import BookMarkCard from '@/components/bookmarks/BookMarkCard';
+import BookMarkCard from '@/components/BookMarks/BookMarkCard';
 
 export default {
   // eslint-disable-next-line
   name: 'Bookmarks',
   components: {
     BookMarkCard,
+  },
+  data() {
+    return {
+      bookmarksList: [],
+    };
+  },
+  watch: {
+    bookmarksList() {
+      this.setList();
+    },
+  },
+  methods: {
+    setList() {
+      this.bookmarksList = this.$store.getters.bookmarks;
+    },
+    removeBookMark(item) {
+      this.bookmarksList = this.bookmarksList.filter((el) => el.id !== item.id);
+      this.$store.commit('removeBookmark', item);
+    },
+  },
+  created() {
+    this.setList();
   },
 };
 </script>
