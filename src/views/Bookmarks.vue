@@ -1,10 +1,17 @@
 <template>
   <b-container class="bookmarks">
     <b-row>
-      <b-col cols="12">
+      <b-col class="d-flex justify-content-between" cols="12">
         <div class="title">
           <h1>My Bookmarks</h1>
         </div>
+        <b-pagination
+          class="mt-2"
+          :total-rows="bookmarksList.length"
+          v-model="currentPage"
+          :per-page="4"
+          first-number
+        ></b-pagination>
       </b-col>
       <b-col>
         <b-row>
@@ -12,7 +19,7 @@
             class="match-height mt-2 mb-2"
             sm="12"
             lg="3"
-            v-for="bookmark in bookmarksList"
+            v-for="bookmark in itemsForPage"
             :key="bookmark.id"
           >
             <BookMarkCard
@@ -38,11 +45,22 @@ export default {
   data() {
     return {
       bookmarksList: [],
+      currentPage: 1,
     };
   },
   watch: {
     bookmarksList() {
       this.setList();
+    },
+  },
+  computed: {
+    itemsForPage() {
+      const page = this.currentPage;
+      const itemsPerPage = 4;
+      const startIndex = (page - 1) * itemsPerPage;
+      const endIndex = startIndex + itemsPerPage;
+      const itemsForPage = this.bookmarksList.slice(startIndex, endIndex);
+      return itemsForPage;
     },
   },
   methods: {
