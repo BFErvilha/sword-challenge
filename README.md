@@ -1,6 +1,4 @@
-# Sword Health Challenge
-
-Github Discovery
+# Github Discovery
 
 Build a Github repository discovery website with layouts inspired by Netflix, where users login to their accounts and see the popular repositories from Github by different topics.
 
