@@ -21,7 +21,7 @@
               pill
               :class="lang.state ? 'active' : ''"
               variant="primary"
-              @click="lang.state = !lang.state"
+              @click="showLang(lang)"
               >{{ lang.name }}</b-button
             >
           </b-col>
@@ -29,7 +29,11 @@
       </b-col>
     </b-row>
     <div v-for="(lang, index) in languages" :key="index">
-      <LanguageTop v-if="lang.state" :language="lang.name" />
+      <LanguageTop
+        v-if="lang.state"
+        :isLoading="loading"
+        :language="lang.name"
+      />
     </div>
   </b-container>
 </template>
@@ -51,9 +55,18 @@ export default {
         { name: 'CSS', state: false },
         { name: 'Node', state: false },
       ],
+      loading: false,
     };
   },
-  methods: {},
+  methods: {
+    showLang(lang) {
+      this.loading = true;
+      setTimeout(() => {
+        lang.state = !lang.state;
+        this.loading = false;
+      }, 500);
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>
