@@ -10,14 +10,18 @@
         <b-row>
           <b-col
             v-for="(lang, index) in languages"
+            sm="4"
+            md="4"
+            lg="2"
             :key="index"
-            class="language-filter"
+            class="language-filter mb-2"
           >
             <b-button
               class="btn-toogle w-100"
               pill
-              :pressed.sync="lang.state"
+              :class="lang.state ? 'active' : ''"
               variant="primary"
+              @click="lang.state = !lang.state"
               >{{ lang.name }}</b-button
             >
           </b-col>

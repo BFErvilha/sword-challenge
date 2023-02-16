@@ -2,7 +2,7 @@
   <section>
     <b-row>
       <b-col cols="12" class="mt-2">
-        <div class="d-flex justify-content-between">
+        <div class="d-flex flex-wrap justify-content-between">
           <b-dropdown
             :id="language"
             :text="`Top ${language}`"
@@ -36,6 +36,7 @@
           <b-col
             class="match-height mt-2 mb-2"
             sm="12"
+            md="6"
             lg="3"
             v-for="repo in data"
             :key="repo.id"

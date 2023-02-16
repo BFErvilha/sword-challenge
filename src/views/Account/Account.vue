@@ -34,7 +34,7 @@
         </b-form-group>
         <div class="text-left">
           <b-button
-            class="mt-2"
+            class="btn-save mt-2"
             @click="updateUser()"
             href="#"
             variant="primary"
@@ -105,6 +105,16 @@ export default {
     h1 {
       font-weight: bold;
       font-size: 22px;
+    }
+  }
+
+  .btn-save {
+    background-color: #f46262;
+    border-color: #f46262;
+
+    &:hover {
+      background-color: #b24747;
+      border-color: #8e3636;
     }
   }
 

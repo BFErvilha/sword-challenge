@@ -100,6 +100,7 @@ export default {
 
 <style lang="scss" scoped>
 .item-card {
+  height: 380px;
   transition: transform 0.2s;
   &:hover {
     @media (min-width: 600px) {

@@ -19,11 +19,16 @@
           <b-col
             class="match-height mt-2 mb-2"
             sm="12"
+            md="6"
             lg="3"
             v-for="bookmark in itemsForPage"
             :key="bookmark.id"
           >
-            <BookMarkCard :repo="bookmark" @removeBookMark="removeBookMark" />
+            <BookMarkCard
+              :repo="bookmark"
+              :isLoading="loading"
+              @removeBookMark="removeBookMark"
+            />
           </b-col>
         </b-row>
       </b-col>
@@ -43,6 +48,7 @@ export default {
     return {
       bookmarksList: [],
       currentPage: 1,
+      loading: false,
     };
   },
   watch: {
@@ -68,7 +74,11 @@ export default {
   },
   methods: {
     setList() {
-      this.bookmarksList = this.$store.getters.bookmarks;
+      this.loading = true;
+      setTimeout(() => {
+        this.bookmarksList = this.$store.getters.bookmarks;
+        this.loading = false;
+      }, 500);
     },
     removeBookMark(item) {
       this.bookmarksList = this.bookmarksList.filter((el) => el.id !== item.id);
